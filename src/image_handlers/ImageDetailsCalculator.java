@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ImageDetailsCalculator {
 
-    public static final int DEFAULT_BAR_HEIGHT = 500;
+    public static final int DEFAULT_BAR_HEIGHT = 300;
     public static final int DEFAULT_WIDTH_PER_TICK = 1;
 
     public static Dimension calculateDimensions(ArrayList<TrackArray> trackList){
@@ -35,7 +35,7 @@ public class ImageDetailsCalculator {
         //y calculation
         y = MathWrapper.leastCommonMultiple(maxChordsArray);
 
-        System.out.println("Dimensions : "+x+"x"+y);
+        System.out.println("Dimensions : "+x*DEFAULT_WIDTH_PER_TICK+"x"+y*DEFAULT_BAR_HEIGHT*trackList.size());
 
         return new Dimension(x*DEFAULT_WIDTH_PER_TICK,y*DEFAULT_BAR_HEIGHT*trackList.size());
     }

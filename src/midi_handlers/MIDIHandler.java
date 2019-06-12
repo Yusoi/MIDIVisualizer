@@ -132,7 +132,8 @@ public class MIDIHandler {
         midiHandler.midiParser();
         midiHandler.printTracks();
         ImageCreator ic = new ImageCreator("Cenas",midiHandler.trackList);
-        ic.createFile(ic.generateImage());
+        ic.createFile(ic.generateImage(false));
+        System.out.println("Finished");
     }
 
 }

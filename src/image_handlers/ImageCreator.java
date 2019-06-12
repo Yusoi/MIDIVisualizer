@@ -23,12 +23,13 @@ public class ImageCreator {
         this.songName = songName;
         this.trackList = new ArrayList<>(trackList);
         dim = ImageDetailsCalculator.calculateDimensions(trackList);
+        System.out.println("Dimensions -> x: "+dim.getX()+" y: "+dim.getY());
     }
 
-    public BufferedImage generateImage(){
+    public BufferedImage generateImage(boolean coloringType){
 
         try {
-            File imageFile = File.createTempFile(songName, ".jpg");
+            File imageFile = File.createTempFile(songName, ".png");
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -46,15 +47,17 @@ public class ImageCreator {
 
                     int count = 0;
                     for (Note n : chordNotes) {
-
-                        //Color c = keyBasedColoring(n);
-                        Color c = noteBasedColoring(n);
+                        Color c;
+                        if(coloringType)
+                            c = keyBasedColoring(n);
+                        else
+                            c = noteBasedColoring(n);
                         graphics.setPaint(c);
                         graphics.fillRect(tick * ImageDetailsCalculator.DEFAULT_WIDTH_PER_TICK,
                                 count * heightPerNote + track * dim.getY()/trackList.size(),
                                 ImageDetailsCalculator.DEFAULT_WIDTH_PER_TICK,
                                 heightPerNote);
-                        System.out.println("X: " + tick * ImageDetailsCalculator.DEFAULT_WIDTH_PER_TICK + " Y: " + count * heightPerNote + " WIDTH: " + ImageDetailsCalculator.DEFAULT_WIDTH_PER_TICK + " HEIGHT: " + heightPerNote);
+                        //System.out.println("X: " + tick * ImageDetailsCalculator.DEFAULT_WIDTH_PER_TICK + " Y: " + count * heightPerNote + " WIDTH: " + ImageDetailsCalculator.DEFAULT_WIDTH_PER_TICK + " HEIGHT: " + heightPerNote);
                         count++;
                     }
                 }else{
@@ -127,9 +130,9 @@ public class ImageCreator {
     }
 
     public void createFile(BufferedImage image){
-        File outputfile = new File("image.jpg");
+        File outputfile = new File("Barcode.png");
         try {
-            ImageIO.write(image, "jpg", outputfile);
+            ImageIO.write(image, "png", outputfile);
         }catch(IOException e){
 
         }

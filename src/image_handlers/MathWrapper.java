@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class MathWrapper {
 
-    //TODO
     public static int leastCommonMultiple(int[] numbers){
 
         int lcm = 0;
